@@ -12,7 +12,7 @@ void main() async {
   // Open the database and store the reference.
   var databasesPath = await getDatabasesPath();
   print(databasesPath);
-  final Future<Database> database = openDatabase(
+  final database = openDatabase(
     // Set the path to the database. Note: Using the `join` function from the
     // `path` package is best practice to ensure the path is correctly
     // constructed for each platform.
@@ -20,7 +20,7 @@ void main() async {
     // When the database is first created, create a table to store dogs.
     onCreate: (db, version) {
       return db.execute(
-        "CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)",
+        'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
       );
     },
     // Set the version. This executes the onCreate function and provides a
@@ -30,7 +30,7 @@ void main() async {
 
   Future<void> insertDog(Dog dog) async {
     // Get a reference to the database.
-    final Database db = await database;
+    final db = await database;
 
     // Insert the Dog into the correct table. Also specify the
     // `conflictAlgorithm`. In this case, if the same dog is inserted
@@ -44,7 +44,7 @@ void main() async {
 
   Future<List<Dog>> dogs() async {
     // Get a reference to the database.
-    final Database db = await database;
+    final db = await database;
 
     // Query the table for all The Dogs.
     final List<Map<String, dynamic>> maps = await db.query('dogs');
@@ -68,7 +68,7 @@ void main() async {
       'dogs',
       dog.toMap(),
       // Ensure that the Dog has a matching id.
-      where: "id = ?",
+      where: 'id = ?',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [dog.id],
     );
@@ -82,7 +82,7 @@ void main() async {
     await db.delete(
       'dogs',
       // Use a `where` clause to delete a specific dog.
-      where: "id = ?",
+      where: 'id = ?',
       // Pass the Dog's id as a whereArg to prevent SQL injection.
       whereArgs: [id],
     );
@@ -123,7 +123,7 @@ class Dog {
   final String name;
   final int age;
 
-  Dog({required this.id, this.name = "Unknown", this.age = 0});
+  Dog({required this.id, this.name = 'Unknown', this.age = 0});
 
   Map<String, dynamic> toMap() {
     return {
