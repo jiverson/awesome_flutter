@@ -8,7 +8,7 @@ class Book extends Equatable {
 
   @override
   String toString() {
-    return "Book : title = " + title + ", author = " + author;
+    return 'Book : title = ' + title + ', author = ' + author;
   }
 
   @override

@@ -6,7 +6,7 @@ import 'package:jiverson_navauth_demo/src/screen/base_screen.dart';
 class UserScreen extends StatefulWidget {
   final ValueChanged refresh;
 
-  UserScreen({Key key, @required this.refresh}) : super(key: key);
+  UserScreen({Key? key, required this.refresh}) : super(key: key);
 
   @override
   _UserScreenState createState() => _UserScreenState();
@@ -14,7 +14,7 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends BaseScreenState<UserScreen> {
   List<Widget> buildColumn(BuildContext context) {
-    List<Widget> column = [];
+    var column = <Widget>[];
     column.add(
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -25,7 +25,7 @@ class _UserScreenState extends BaseScreenState<UserScreen> {
       ),
     );
     if (AuthenticationManager.instance.isLoggedIn) {
-      column.add(Text("You are connected"));
+      column.add(Text('You are connected'));
     } else {
       column.add(
         Padding(
@@ -38,9 +38,9 @@ class _UserScreenState extends BaseScreenState<UserScreen> {
         child: Text('Enter password'),
       ));
       column.add(
-        RaisedButton(
+        ElevatedButton(
           onPressed: () {
-            this.doLogin();
+            doLogin();
           },
           child: Text('Login'),
         ),
@@ -67,7 +67,7 @@ class _UserScreenState extends BaseScreenState<UserScreen> {
                     Icons.logout,
                   ),
                   onPressed: () {
-                    this.doLogout();
+                    doLogout();
                   })
             ],
           )

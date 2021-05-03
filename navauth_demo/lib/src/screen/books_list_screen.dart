@@ -8,7 +8,7 @@ class BooksListScreen extends StatelessWidget {
   final List<Book> books;
 
   BooksListScreen({
-    @required this.books,
+    required this.books,
   });
 
   @override
@@ -32,8 +32,8 @@ class BooksListScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               AuthenticationManager.instance.isLoggedIn
-                  ? "You are connected"
-                  : "You are not connected",
+                  ? 'You are connected'
+                  : 'You are not connected',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),

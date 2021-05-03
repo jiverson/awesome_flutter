@@ -4,9 +4,9 @@ import 'package:jiverson_navauth_demo/src/model/book.dart';
 import 'package:jiverson_navauth_demo/src/navigation/my_router_delegate.dart';
 
 class BookDetailsScreen extends StatelessWidget {
-  final Book book;
+  final Book? book;
 
-  BookDetailsScreen({Key key, @required this.book}) : super(key: key);
+  BookDetailsScreen({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class BookDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (book != null) ...[
-              Text(book.title, style: Theme.of(context).textTheme.headline6),
-              Text(book.author, style: Theme.of(context).textTheme.subtitle1),
+              Text(book!.title, style: Theme.of(context).textTheme.headline6),
+              Text(book!.author, style: Theme.of(context).textTheme.subtitle1),
             ],
           ],
         ),

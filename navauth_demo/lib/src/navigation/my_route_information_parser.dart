@@ -6,9 +6,9 @@ class MyRouteInformationParser extends RouteInformationParser<AppConfig> {
   @override
   Future<AppConfig> parseRouteInformation(
       RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location);
+    final uri = Uri.parse(routeInformation.location!);
     // Handle '/' and '/book'
-    if (uri.pathSegments.length == 0 ||
+    if (uri.pathSegments.isEmpty ||
         (uri.pathSegments.length == 1 &&
             uri.pathSegments[0] == AppConfig.book().uri.pathSegments[0])) {
       return AppConfig.book();
@@ -34,7 +34,7 @@ class MyRouteInformationParser extends RouteInformationParser<AppConfig> {
   }
 
   @override
-  RouteInformation restoreRouteInformation(AppConfig path) {
+  RouteInformation? restoreRouteInformation(AppConfig path) {
     if (path.isUnknown) {
       return RouteInformation(location: AppConfig.unknown().uri.path);
     }

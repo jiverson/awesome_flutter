@@ -12,8 +12,9 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  MyRouterDelegate _routerDelegate = MyRouterDelegate();
-  MyRouteInformationParser _routeInformationParser = MyRouteInformationParser();
+  final MyRouterDelegate _routerDelegate = MyRouterDelegate();
+  final MyRouteInformationParser _routeInformationParser =
+      MyRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {

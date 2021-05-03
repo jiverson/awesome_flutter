@@ -44,17 +44,17 @@ abstract class BaseScreenState<T extends StatefulWidget> extends State<T> {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is LoggedOutState) {
-          this.onLoggedOut();
+          onLoggedOut();
         } else if (state is AuthenticationSuccessState) {
-          this.onLoggedIn();
+          onLoggedIn();
         }
       },
       child: Scaffold(
-        backgroundColor: this.backgroundColor,
-        appBar: this.buildAppBar(context),
-        body: this.buildScreen(context),
-        bottomNavigationBar: this.buildBottomNavigationBar(context),
-        floatingActionButton: this.buildFloatingActionButton(context),
+        backgroundColor: backgroundColor,
+        appBar: buildAppBar(context),
+        body: buildScreen(context),
+        bottomNavigationBar: buildBottomNavigationBar(context),
+        floatingActionButton: buildFloatingActionButton(context),
       ),
     );
   }
@@ -65,7 +65,7 @@ abstract class BaseScreenState<T extends StatefulWidget> extends State<T> {
   /// Implement this to build an [AppBar] for all screens
   /// Override this method in each screen that needs a specific one
   ///
-  PreferredSizeWidget buildAppBar(BuildContext context) {
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
     return null;
   }
 
@@ -73,7 +73,7 @@ abstract class BaseScreenState<T extends StatefulWidget> extends State<T> {
   /// Implement this to build a [BottomNavigationBar] for all screens
   /// Override this method in each screen that needs a specific one
   ///
-  Widget buildBottomNavigationBar(BuildContext context) {
+  Widget? buildBottomNavigationBar(BuildContext context) {
     return null;
   }
 
@@ -81,7 +81,7 @@ abstract class BaseScreenState<T extends StatefulWidget> extends State<T> {
   /// Implement this to build a [FloatingActionButton] for all screens
   /// Override this method in each screen that needs a specific one
   ///
-  Widget buildFloatingActionButton(BuildContext context) {
+  Widget? buildFloatingActionButton(BuildContext context) {
     return null;
   }
 

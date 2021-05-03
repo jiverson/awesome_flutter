@@ -9,10 +9,11 @@ import 'package:jiverson_navauth_demo/src/screen/unknown_screen.dart';
 
 class MyRouterDelegate extends RouterDelegate<AppConfig>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppConfig> {
+  @override
   final GlobalKey<NavigatorState> navigatorKey;
 
   AppConfig currentState = AppConfig.book();
-  AppConfig previousState;
+  AppConfig? previousState;
   // for pop on User Page, to possibly go back to a specific book
 
   List<Book> books = [
@@ -22,17 +23,18 @@ class MyRouterDelegate extends RouterDelegate<AppConfig>
   ];
 
   MyRouterDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
-    print("1. BookRouterDelegate initialized");
+    print('1. BookRouterDelegate initialized');
     print(this);
-    assert(AppConfig.book() == this.currentConfiguration);
+    assert(AppConfig.book() == currentConfiguration);
   }
 
+  @override
   AppConfig get currentConfiguration {
     return currentState;
   }
 
   List<Page<dynamic>> buildPage() {
-    List<Page<dynamic>> pages = [];
+    var pages = <Page<dynamic>>[];
     pages.add(
       MaterialPage(
         key: ValueKey('BooksListPage'),
@@ -43,12 +45,13 @@ class MyRouterDelegate extends RouterDelegate<AppConfig>
     );
     if (currentState.uri.pathSegments[0] ==
         AppConfig.book().uri.pathSegments[0]) {
-      if (currentState.id != null)
+      if (currentState.id != null) {
         pages.add(
           MaterialPage(
               key: ValueKey('BookListPageId' + currentState.id.toString()),
-              child: BookDetailsScreen(book: books[currentState.id])),
+              child: BookDetailsScreen(book: books[currentState.id!])),
         );
+      }
     } else if (currentState.uri.pathSegments[0] ==
         AppConfig.user().uri.pathSegments[0]) {
       pages.add(MaterialPage(
@@ -57,16 +60,17 @@ class MyRouterDelegate extends RouterDelegate<AppConfig>
             refresh: _notifyListeners,
           )));
     }
-    if (currentState.isUnknown)
+    if (currentState.isUnknown) {
       pages.add(
           MaterialPage(key: ValueKey('UnknownPage'), child: UnknownScreen()));
+    }
     return pages;
   }
 
   @override
   Widget build(BuildContext context) {
-    print("BookRouterDelegate building...");
-    print(this.currentState);
+    print('BookRouterDelegate building...');
+    print(currentState);
     return Navigator(
       key: navigatorKey,
       //transitionDelegate: AnimationTransitionDelegate(),
@@ -79,7 +83,7 @@ class MyRouterDelegate extends RouterDelegate<AppConfig>
             currentState.id != null) {
           currentState = AppConfig.book();
         } else if (currentState.uri.path == AppConfig.user().uri.path) {
-          currentState = previousState;
+          currentState = previousState!;
           previousState = null;
         } else {
           currentState = AppConfig.unknown();
